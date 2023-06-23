@@ -1,0 +1,19 @@
+dbconfig.php 를 아래 형식으로 작성해야함.
+
+<?php
+$servername = '';
+$dbuser = '';
+$dbpassword = '';
+$dbname = '';
+
+try {
+    $db = new PDO("mysql:host={$servername};dbname=${dbname}", $dbuser, $dbpassword);
+
+    //prepared Statment를 지원하지 않는 경우 데이터베이스의 기능을 사용하도록 함
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true); // 쿼리버퍼링 활성화
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //pdo 객체가 에러를 처리하는 방식
+    echo "DB연결 성공";
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
