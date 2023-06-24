@@ -1,3 +1,8 @@
+https://www.youtube.com/watch?v=8U6MBlifDQY&list=PLTb3qGCzYjS1sqYn00_g6t5W1Ikhn_dC4&index=7
+9:00
+
+
+
 dbconfig.php 를 아래 형식으로 작성해야함.
 
 <?php
