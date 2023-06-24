@@ -11,13 +11,14 @@ include './inc_header.php';
 
 <main class="w-50 mx-auto border rounded-5 p-5">
     <h1 class="text-center">회원가입</h1>
-    <form name="input_form" method="post" enctype="multipart/form-data" action="./pg/member_process.php">
+    <form name="input_form" method="post" enctype="multipart/form-data" autocomplete="off" action="./pg/member_process.php">
         <input type="hidden" name="mode" value="input">
-        <input type="hidden" name="id_chk" value="0">
+        <input type="hidden" name="id_chk" value="0"> <!--  아이디 중복확인 여부 -->
+        <input type="hidden" name="email_chk" value="0"><!-- 이메일 중복확인 여부 -->
         <div class="d-flex gap-2 align-items-end">
             <div>
                 <label for="f_id" class="form-label">아이디</label>
-                <input type="text" class="form-control" id="f_id" placeholder="아이디를 입력해 주세요">
+                <input type="text" name="id" class="form-control" id="f_id" placeholder="아이디를 입력해 주세요">
             </div>
             <button type="button" class="btn btn-secondary" id="btn_id_check">아이디 중복확인</button>
         </div>
@@ -25,11 +26,11 @@ include './inc_header.php';
         <div class="d-flex mt-3 gap-2 justify-content-between">
             <div class="w-50">
                 <label for="f_password" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" id="f_password" placeholder="비밀번호를 입력해 주세요">
+                <input type="password" name="password" class="form-control" id="f_password" placeholder="비밀번호를 입력해 주세요">
             </div>
             <div class="w-50">
                 <label for="f_password2" class="form-label">비밀번호 확인</label>
-                <input type="password" class="form-control" id="f_password2" placeholder="비밀번호를 입력해 주세요">
+                <input type="password" name="password2" class="form-control" id="f_password2" placeholder="비밀번호를 입력해 주세요">
             </div>
         </div>
 
@@ -37,9 +38,9 @@ include './inc_header.php';
         <div class="d-flex mt-3 gap-2 align-items-end">
             <div class="flex-grow-1">
                 <label for="f_email" class="form-label">이메일</label>
-                <input type="text" class="form-control" id="f_email" placeholder="이메일를 입력해 주세요">
+                <input type="text" name="email" class="form-control" id="f_email" placeholder="이메일를 입력해 주세요">
             </div>
-            <button class="btn btn-secondary">이메일 중복확인</button>
+            <button type="button" class="btn btn-secondary" id="btn_email_check">이메일 중복확인</button>
         </div>
 
         <div class="mt-3 d-flex  gap-2 align-items-end">
@@ -47,7 +48,7 @@ include './inc_header.php';
                 <label for="f_zipcode">우편번호</label>
                 <input type="text" name="zipcode" id="f_zipcode" class="form-control" maxlength="5" minlength="5" autocomplete="off">
             </div>
-            <button class="btn btn-secondary">우편번호찾기</button>
+            <button type="button" class="btn btn-secondary">우편번호찾기</button>
         </div>
 
         <div class="d-flex mt-3 gap-2 justify-content-between">
@@ -69,8 +70,8 @@ include './inc_header.php';
         </div>
 
         <div class="mt-3 d-flex gap-2">
-            <button class="btn btn-primary w-50">가입확인</button>
-            <button class="btn btn-secondary w-50">가입취소</button>
+            <button type="button" class="btn btn-primary w-50" id="btn_submit">가입확인</button>
+            <button type="button" class="btn btn-secondary w-50">가입취소</button>
         </div>
     </form>
 </main>

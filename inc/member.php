@@ -21,4 +21,17 @@ class Member
         //echo $stmt->rowCount();
         return $stmt->rowCount() ? true : false;
     }
+
+
+    //이메일 중복체크용 
+    public function email_exists($email)
+    {
+        $sql = "Select * From member Where email=:email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        //조회된 데이터가 1개라도 있음면 
+        //echo $stmt->rowCount();
+        return $stmt->rowCount() ? true : false;
+    }
 }
