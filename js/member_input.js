@@ -81,39 +81,76 @@ document.addEventListener("DOMContentLoaded",()=>{
 
         const f=document.input_form;
         if(f.id.value==""){
-            alert("아이디를 입력해주세요ㄴ");
+            alert("아이디를 입력해주세요");
             f.id.focus();
             return false;
-        }
-        
+        }        
         if(f.id_chk.value=="0"){
             alert("아이디 중복확인후 진행하세요");
             return false;
         }
+        //비밀번호 확인
+        if(f.password.value ==''){
+            alert("비밀번호 입력하세요");
+            f.password.focus();
+            return false;
+        }
+        if(f.password2.value ==''){
+            alert("확인용 비밀번호 입력하세요");
+            f.password2.focus();
+            return false;
+        }
 
-    //비밀번호 확인
-    if(f.password.value ==''){
-        alert("비밀번호 입력하세요");
-        f.password.focus();
-        return false;
-    }
-    if(f.password2.value ==''){
-        alert("확인용 비밀번호 입력하세요");
-        f.password2.focus();
-        return false;
-    }
-
-    //비밀번호 일치여부 확인
-    if(f.password.value != f.password2.value){
-        alert('비밀번호가 일치하지 않습니다.');
-        f.password.value ='';
-        f.password2.value ='';
-        f.password.focus();
-        return false;
-    }
-
-
+        //비밀번호 일치여부 확인
+        if(f.password.value != f.password2.value){
+            alert('비밀번호가 일치하지 않습니다.');
+            f.password.value ='';
+            f.password2.value ='';
+            f.password.focus();
+            return false;
+        }
     })
 
+    //우편번호 찾기 
+    const btn_zipcode = document.getElementById("btn_zipcode");
+    btn_zipcode.addEventListener("click",()=>{            
+        new daum.Postcode({
+            oncomplete: function(data) {
+                console.log(data);
+                let addr = '';
+                let extra_addr = '';
+                if(data.userSelectedType=="J") {
+                    addr = data.jibunAddress
+                }else if(data.userSelectedType =="R"){
+                    addr = data.roadAddress
+                } 
+                if(data.bname != ''){
+                    extra_addr = data.bname;                                        
+                }
+
+                if(data.buildingName != ''){                     
+                    if(extra_addr == ''){                        
+                        extra_addr = data.buildingName;
+                    }else{                        
+                        extra_addr += ', ' + data.buildingName;
+                    }                    
+                }
+
+                if(extra_addr != ''){
+                    extra_addr = '(' + extra_addr + ')'
+                }
+
+                const f_addr1 = document.querySelector("#f_addr1");
+                f_addr1.value = addr + extra_addr;
+
+                const f_zipcode = document.querySelector("#f_zipcode");
+                f_zipcode.value = data.zonecode;
+
+                const f_addr2 = document.getElementById("f_addr2");
+                f_addr2.focus()
+            }
+        }).open(); 
+    })
 
 })
+

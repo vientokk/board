@@ -8,6 +8,8 @@ if (!isset($_POST['chk']) or $_POST['chk'] != 1) {
 $js_array = ['./js/member_input.js'];
 include './inc_header.php';
 ?>
+//다음 우편번호
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <main class="w-50 mx-auto border rounded-5 p-5">
     <h1 class="text-center">회원가입</h1>
@@ -48,7 +50,7 @@ include './inc_header.php';
                 <label for="f_zipcode">우편번호</label>
                 <input type="text" name="zipcode" id="f_zipcode" class="form-control" maxlength="5" minlength="5" autocomplete="off">
             </div>
-            <button type="button" class="btn btn-secondary">우편번호찾기</button>
+            <button type="button" class="btn btn-secondary" id="btn_zipcode">우편번호찾기</button>
         </div>
 
         <div class="d-flex mt-3 gap-2 justify-content-between">
