@@ -109,6 +109,36 @@ document.addEventListener("DOMContentLoaded",()=>{
             f.password.focus();
             return false;
         }
+        //이메일 입력확인
+        if(f.email.value==''){
+            alert("이메일을 입력해주세요");
+            f.email.focus();
+            return false;
+        }
+        
+        if(f.email_chk.value ==0){
+            alert("이메일을 중복확인후 진행하세요.");
+            return false;
+        }
+
+        //우편번호 입력확인
+        if(f.zipcode.value ==''){
+            alert("우편번호 입력후 진행하세요.");
+            return false;
+        }
+        if(f.addr1.value ==''){
+            alert("주소 입력후 진행하세요.");
+            f.addr1.focus();
+            return false;
+        }
+        if(f.addr2.value ==''){
+            alert("상세주소 입력후 진행하세요.");
+            f.addr2.focus();
+            return false;
+        }
+
+        f.submit();
+
     })
 
     //우편번호 찾기 
@@ -116,7 +146,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     btn_zipcode.addEventListener("click",()=>{            
         new daum.Postcode({
             oncomplete: function(data) {
-                console.log(data);
+                //console.log(data);
                 let addr = '';
                 let extra_addr = '';
                 if(data.userSelectedType=="J") {
@@ -151,6 +181,24 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
         }).open(); 
     })
+
+    //프로필 이미지
+    const f_photo = document.querySelector("#f_photo");
+    f_photo.addEventListener("change",(e)=>{
+        //console.log(e);
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+
+        reader.onload = function(event){
+            //console.log(event);
+            // const img = document.createElement("img");
+            // img.setAttribute("src", event.tartet.result);
+            // document.querySelector("#f_preview").appendChild(img);
+            const f_preview = document.querySelector("#f_preview");
+            f_preview.setAttribute("src", event.target.result);
+        }
+    })
+
 
 })
 
