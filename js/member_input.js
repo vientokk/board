@@ -89,6 +89,14 @@ document.addEventListener("DOMContentLoaded",()=>{
             alert("아이디 중복확인후 진행하세요");
             return false;
         }
+
+        //이름 확인
+        if(f.name.value==""){
+            alert("이름을 입력해주세요");
+            f.name.focus();
+            return false;
+        }  
+
         //비밀번호 확인
         if(f.password.value ==''){
             alert("비밀번호 입력하세요");
