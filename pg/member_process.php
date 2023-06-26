@@ -36,6 +36,12 @@ if ($mode == 'email_chk') {
     if ($email == '') {
         die(json_encode(['result' => 'empty_email']));
     }
+
+    //이메일 형식체크
+    if ($mem->email_format_check($email) === false) {
+        die(json_encode(['result' => 'email_format_wrong']));
+    }
+
     if ($mem->email_exists($email)) {
         $arr = ['result' => 'fail'];
         $json = json_encode($arr);
@@ -81,4 +87,9 @@ if ($mode == 'input') {
     ];
 
     $mem->input($arr);
+    echo "
+    <script> 
+      self.location.href='../member_success.php'
+    </script>
+    ";
 }

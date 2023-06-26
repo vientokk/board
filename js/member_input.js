@@ -69,6 +69,10 @@ document.addEventListener("DOMContentLoaded",()=>{
                     document.input_form.email_chk.value="0";
                     alert("이메일를 입력해주세요");                    
                     f_email.focus();
+                }else if(data.result == 'email_format_wrong') {
+                    alert('이메일이 형식에 맞지 않습니다.')
+                    f_email.value = ''
+                    f_email.focus()
                 }
             }
         }
