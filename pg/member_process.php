@@ -45,7 +45,29 @@ if ($mode == 'email_chk') {
     }
 }
 
-//이메일 중복확인
+
+//프로필 이미지 처리
+$tmparr = explode('.', $_FILES['photo']['name']);
+$ext = end($tmparr);
+$photo = $id . '.' . $ext;
+//chmod 777 data/profile            //이미지 저장할 폴더생성
+
+copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
+
+// Array
+// (
+//     [profile] => Array
+//         (
+//             [name] => person2.png
+//             [type] => image/png
+//             [tmp_name] => C:\xampp\tmp\php785.tmp
+//             [error] => 0
+//             [size] => 1533
+//         )
+
+// )
+
+//가입데이터 전송
 if ($mode == 'input') {
     $arr = [
         'id' => $id,
@@ -54,7 +76,8 @@ if ($mode == 'input') {
         'name' => $name,
         'zipcode' => $zipcode,
         'addr1' => $addr1,
-        'addr2' => $addr2
+        'addr2' => $addr2,
+        'photo' => $photo
     ];
 
     $mem->input($arr);

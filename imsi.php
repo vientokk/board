@@ -1,5 +1,16 @@
 <?php
 
+
+print_r(explode('.', '22.jpg'));
+
+$aaa = explode('.', '22.jpg');
+echo "<bR>";
+$bbb = end($aaa);
+
+echo $bbb;
+
+exit;
+
 //DB연결
 include './inc/dbconfig.php';
 include './inc/member.php';

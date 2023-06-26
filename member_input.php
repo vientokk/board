@@ -75,7 +75,7 @@ include './inc_header.php';
         <div class="mt-3 d-flex gap-5">
             <div>
                 <label for="f_photo" class="form-label">프로필이미지</label>
-                <input type="file" name="profile" id="f_photo" class="form-control">
+                <input type="file" name="photo" id="f_photo" class="form-control">
             </div>
             <img src="./images/preson1.png" id="f_preview" class="w-25" alt="profile image">
         </div>
