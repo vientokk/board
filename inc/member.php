@@ -57,4 +57,17 @@ class Member
         $stmt->bindParam(':ip', $_SERVER['REMOTE_ADDR']);
         $stmt->execute();
     }
+
+    //로그인
+    public function login($id, $pw)
+    {
+        $sql = "SELECT * FROM member WHERE id=:id  And password=:password";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':password', $pw);
+        $stmt->execute();
+        //조회된 데이터가 1개라도 있음면 
+        //echo $stmt->rowCount();
+        return $stmt->rowCount() ? true : false;
+    }
 }
