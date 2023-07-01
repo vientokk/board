@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         xhr.onload = ()=>{
             if(xhr.status == 200){
                 // console.log(xhr.responseText);
-                 const data = JSON.parse(xhr.responseText);
+                const data = JSON.parse(xhr.responseText);
                 // console.log(data);
 
                 if(data.result == 'login_fail'){
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                     return false;
                 }else if(data.result =="login_success"){
                     alert("로그인 성공");
-                    self.location.href='./member.php';
+                    self.location.href='./index.php';
                 } 
             }else{
                 alert("통신실패!! 다시시도해주세요");

@@ -21,7 +21,7 @@ $mem = new Member($db);
 if ($mem->login($id, $pw)) {
     $arr = ['result' => 'login_success'];
     session_start();
-    $_SESSION['sec_id'] = $id;
+    $_SESSION['ses_id'] = $id;
 } else {
 
     $arr = ['result' => 'login_fail'];

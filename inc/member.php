@@ -77,6 +77,12 @@ class Member
         if ($stmt->rowCount()) {
             $row = $stmt->fetch();
             if (password_verify($pw, $row['password'])) {
+                $sql = "Update member Set login_dt = now() Where id = :id";
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+
                 return true;
             } else {
                 return false;
@@ -86,6 +92,16 @@ class Member
         }
         //조회된 데이터가 1개라도 있음면 
         //echo $stmt->rowCount();
-        return $stmt->rowCount() ? true : false;
+        //return $stmt->rowCount() ? true : false;
+    }
+
+
+    public function logout()
+    {
+
+        session_start();
+        session_destroy();
+
+        die('<script>self.location.href = "../index.php";</script>');
     }
 }
