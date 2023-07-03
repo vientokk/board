@@ -98,10 +98,18 @@ class Member
 
     public function logout()
     {
-
         session_start();
         session_destroy();
-
         die('<script>self.location.href = "../index.php";</script>');
+    }
+
+    public function getInfo($id)
+    {
+        $sql = "Select * From member Where id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }

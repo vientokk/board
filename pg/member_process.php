@@ -52,14 +52,6 @@ if ($mode == 'email_chk') {
 }
 
 
-//프로필 이미지 처리
-$tmparr = explode('.', $_FILES['photo']['name']);
-$ext = end($tmparr);
-$photo = $id . '.' . $ext;
-//chmod 777 data/profile            //이미지 저장할 폴더생성
-
-copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
-
 // Array
 // (
 //     [profile] => Array
@@ -75,6 +67,14 @@ copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
 
 //가입데이터 전송
 if ($mode == 'input') {
+
+    //프로필 이미지 처리
+    $tmparr = explode('.', $_FILES['photo']['name']);
+    $ext = end($tmparr);
+    $photo = $id . '.' . $ext;
+    //chmod 777 data/profile            //이미지 저장할 폴더생성
+    copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
+
     $arr = [
         'id' => $id,
         'email' => $email,
@@ -89,7 +89,9 @@ if ($mode == 'input') {
     $mem->input($arr);
     echo "
     <script> 
-      self.location.href='../member_success.php'
+        self.location.href='../member_success.php'
     </script>
     ";
+} else if ($mode == 'edit') {
+    echo "수정";
 }
