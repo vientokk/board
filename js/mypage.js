@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             f.email.focus();
             return false;
         }
-        
+
         //이메일을 변경했다면
         if(f.old_email.value != f.email.value){
             if(f.email_chk.value ==0){
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                 f_addr2.focus()
             }
         }).open(); 
-    })
+    });
 
     //프로필 이미지
     const f_photo = document.querySelector("#f_photo");
@@ -166,8 +166,15 @@ document.addEventListener("DOMContentLoaded",()=>{
             const f_preview = document.querySelector("#f_preview");
             f_preview.setAttribute("src", event.target.result);
         }
-    })
+    });
 
+
+    
+    const btn_cancel = document.getElementById("btn_cancel");
+    btn_cancel.addEventListener("click" , () =>{                
+        alert('취소하였습니다.');
+        self.location.href='./index.php'
+    });
 
 })
 

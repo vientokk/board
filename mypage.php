@@ -35,6 +35,7 @@ include './inc_header.php';
         <input type="hidden" name="mode" value="edit">
         <input type="hidden" name="email_chk" value="0"><!-- 이메일 중복확인 여부 -->
         <input type="hidden" name="old_email" value="<?= $memArr['email']; ?>"><!-- 이메일 수정확인 -->
+        <input type="hidden" name="old_photo" value="<?= $memArr['photo']; ?>"><!-- 프로필사진 수정확인 -->
 
         <div class="d-flex gap-2 align-items-end">
             <div>
@@ -105,7 +106,7 @@ include './inc_header.php';
 
         <div class="mt-3 d-flex gap-2">
             <button type="button" class="btn btn-primary w-50" id="btn_submit">수정확인</button>
-            <button type="button" class="btn btn-secondary w-50">수정취소</button>
+            <button type="button" class="btn btn-secondary w-50" id="btn_cancel">수정취소</button>
         </div>
     </form>
 </main>

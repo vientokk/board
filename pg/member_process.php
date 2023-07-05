@@ -68,13 +68,15 @@ if ($mode == 'email_chk') {
 //가입데이터 전송
 if ($mode == 'input') {
 
-    //프로필 이미지 처리
-    $tmparr = explode('.', $_FILES['photo']['name']);
-    $ext = end($tmparr);
-    $photo = $id . '.' . $ext;
-    //chmod 777 data/profile            //이미지 저장할 폴더생성
-    copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
-
+    $photo = '';
+    if (isset($_FILES['photo']) && $_FILES['photo']['name'] != '') {
+        //프로필 이미지 처리
+        $tmparr = explode('.', $_FILES['photo']['name']);
+        $ext = end($tmparr);
+        $photo = $id . '.' . $ext;
+        //chmod 777 data/profile            //이미지 저장할 폴더생성
+        copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
+    }
     $arr = [
         'id' => $id,
         'email' => $email,
@@ -93,5 +95,42 @@ if ($mode == 'input') {
     </script>
     ";
 } else if ($mode == 'edit') {
-    echo "수정";
+    //프로필 이미지 처리
+    $old_photo = (isset($_POST['photo']) && $_POST['photo']['name'] != '') ? $_POST['old_photh'] : '';
+
+    if (isset($_FILES['photo']) && $_FILES['photo']['name'] != '') {
+
+        if ($old_photo != '') {
+            unlink("../data/profile/" . $old_photo);
+        }
+
+        $tmparr = explode('.', $_FILES['photo']['name']);
+        $ext = end($tmparr);
+        $photo = $id . '.' . $ext;
+        copy($_FILES['photo']['tmp_name'], "../data/profile/" . $photo);
+
+        $old_photo = $photo;
+    }
+
+    session_start();
+    $arr = [
+        'id' => $_SESSION['ses_id'],
+        'email' => $email,
+        'password' => $password,
+        'name' => $name,
+        'zipcode' => $zipcode,
+        'addr1' => $addr1,
+        'addr2' => $addr2,
+        'photo' => $old_photo
+    ];
+
+    // print_r($arr);
+    // exit;
+    $mem->edit($arr);
+    echo "
+    <script> 
+        alert('수정하였습니다.');
+        self.location.href='../index.php'
+    </script>
+    ";
 }
