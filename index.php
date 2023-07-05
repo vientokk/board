@@ -1,6 +1,10 @@
 <?php
 session_start();
+
 $ses_id = (isset($_SESSION['ses_id']) && $_SESSION['ses_id'] != '') ? $_SESSION['ses_id'] : '';
+$ses_level = (isset($_SESSION['ses_level']) && $_SESSION['ses_level'] != '') ? $_SESSION['ses_level'] : '';
+// print_r($ses_level);
+// exit;
 $g_title = "vientokk 게시판";
 
 $js_array = ['js/home.js'];
