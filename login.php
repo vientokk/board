@@ -16,7 +16,7 @@ include './inc_header.php';
             <label for="f_id">아이디</label>
         </div>
         <div class="form-floating mt-2">
-            <input type="text" class="form-control" id="f_pw" placeholder="비밀번호 입력">
+            <input type="password" class="form-control" id="f_pw" placeholder="비밀번호 입력">
             <label for="f_pw">비밀번호</label>
         </div>
         <button class="w-100 mt-2 btn btn-primary" id="btn_login" type="button">확인</button>

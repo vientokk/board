@@ -137,4 +137,14 @@ class Member
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
     }
+
+
+    public function list()
+    {
+        $sql = "Select idx, id, name, email, date_format(create_at,'%Y-%m-%d %H:%i') create_at  From member Order by idx desc";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
