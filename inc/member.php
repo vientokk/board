@@ -139,12 +139,27 @@ class Member
     }
 
 
-    public function list()
+    public function list($page, $limit)
     {
-        $sql = "Select idx, id, name, email, date_format(create_at,'%Y-%m-%d %H:%i') create_at  From member Order by idx desc";
+        $start = ($page - 1) * $limit;
+
+        $sql = "Select idx, id, name, email, date_format(create_at,'%Y-%m-%d %H:%i') create_at 
+            From member
+            Order by idx desc Limit " . $start . "," . $limit;
+
         $stmt = $this->conn->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function total()
+    {
+        $sql = "Select Count(*) cnt From member";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        return $row['cnt'];
     }
 }

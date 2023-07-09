@@ -7,9 +7,20 @@ include './inc_common.php';
 include './inc_header.php';
 include '../inc/dbconfig.php';
 include '../inc/member.php';
+include '../inc/lib.php';   //페이지네이션
+
+
+
 
 $mem = new Member($db);
-$memArr = $mem->list();
+$total = $mem->total();
+$limit = 5;
+$page_limit = 5;
+$page = (isset($_GET['page']) && $_GET['page'] != '' && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+$param = '';
+
+//여기까지. #27 5분48초
+$memArr = $mem->list($page, $limit);
 ?>
 
 <main class="w-75 mx-auto border rounded-5 p-5" style="height: calc(100vh - 266px)">
@@ -41,9 +52,13 @@ $memArr = $mem->list();
         <?php
         }
         ?>
-
-
     </table>
+
+    <?php
+    $pagenation = my_pagination($total, $limit, $page_limit, $page, $param);
+    echo $pagenation;
+    ?>
+
 </main>
 <?php
 
