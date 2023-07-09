@@ -75,7 +75,7 @@ $memArr = $mem->list($page, $limit, $paramArr);
         echo my_pagination($total, $limit, $page_limit, $page, $param);
 
         ?>
-        <button class="btn btn-primary" id="btn-excel">엑셀로 저장</button>
+        <button class="btn btn-primary" id="btn_excel">엑셀로 저장</button>
     </div>
 </main>
 <?php

@@ -16,4 +16,10 @@ document.addEventListener("DOMContentLoaded", () =>{
         self.location.href='./member.php';
     });
 
+    //엑셀로 저장
+    const btn_excel = document.getElementById("btn_excel");
+    btn_excel.addEventListener("click", () =>{
+        self.location.href="./member_to_excel.php";
+    })
+
 })

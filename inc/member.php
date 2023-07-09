@@ -200,4 +200,16 @@ class Member
         $row = $stmt->fetch();
         return $row['cnt'];
     }
+
+
+    public function getAllData()
+    {
+        $sql = "Select * From member Order by idx desc ";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
