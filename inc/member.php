@@ -139,24 +139,62 @@ class Member
     }
 
 
-    public function list($page, $limit)
+    public function list($page, $limit, $paramArr)
     {
         $start = ($page - 1) * $limit;
+        $where = "";
+        if ($paramArr['sn'] != '' && $paramArr['sf'] != '') {
+            switch ($paramArr['sn']) {
+                case '1':
+                    $sn_str = 'name';
+                    break;
+                case '2':
+                    $sn_str = 'id';
+                    break;
+                case '3':
+                    $sn_str = 'email';
+                    break;
+            }
+            $where = "Where " . $sn_str . '=:sf ';
+        }
 
         $sql = "Select idx, id, name, email, date_format(create_at,'%Y-%m-%d %H:%i') create_at 
-            From member
+            From member " . $where . "
             Order by idx desc Limit " . $start . "," . $limit;
 
         $stmt = $this->conn->prepare($sql);
+
+        if ($where != '') {
+            $stmt->bindParam(':sf', $paramArr['sf']);
+        }
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function total()
+    public function total($paramArr)
     {
-        $sql = "Select Count(*) cnt From member";
+        $where = "";
+        if ($paramArr['sn'] != '' && $paramArr['sf'] != '') {
+            switch ($paramArr['sn']) {
+                case '1':
+                    $sn_str = 'name';
+                    break;
+                case '2':
+                    $sn_str = 'id';
+                    break;
+                case '3':
+                    $sn_str = 'email';
+                    break;
+            }
+            $where = " Where " . $sn_str . '=:sf ';
+        }
+
+        $sql = "Select Count(*) cnt From member " . $where;
         $stmt = $this->conn->prepare($sql);
+        if ($where != '') {
+            $stmt->bindParam(':sf', $paramArr['sf']);
+        }
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
         $row = $stmt->fetch();
