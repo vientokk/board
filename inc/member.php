@@ -212,4 +212,13 @@ class Member
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+
+    public function member_del($idx)
+    {
+        $sql = "Delete From member Where idx=:idx";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':idx', $idx);
+        $stmt->execute();
+    }
 }

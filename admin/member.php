@@ -22,7 +22,6 @@ $page = (isset($_GET['page']) && $_GET['page'] != '' && is_numeric($_GET['page']
 
 $param = '';
 
-//여기까지. #27 5분48초
 $memArr = $mem->list($page, $limit, $paramArr);
 ?>
 
@@ -51,7 +50,7 @@ $memArr = $mem->list($page, $limit, $paramArr);
                 <td><?= $row['create_at'] ?></td>
                 <td>
                     <button class="btn btn-primary btn-sm">수정</button>
-                    <button class="btn btn-danger btn-sm">삭제</button>
+                    <button class="btn btn-danger btn-sm btn_mem_delete" data-idx="<?= $row['idx']; ?>">삭제</button>
                 </td>
             </tr>
         <?php

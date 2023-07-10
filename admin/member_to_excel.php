@@ -1,4 +1,5 @@
 <?php
+include './inc_common.php';
 include '../inc/dbconfig.php';
 include '../inc/member.php';
 
@@ -13,7 +14,7 @@ header("Content-Disposition: attachment; filename=member.xls");
 header("Content-Description:PHP8 Generated Data");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
