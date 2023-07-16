@@ -103,6 +103,17 @@ class Member
         die('<script>self.location.href = "../index.php";</script>');
     }
 
+    public function getInfoFormIdx($idx)
+    {
+        $sql = "Select * From member Where idx = :idx";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':idx', $idx);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function getInfo($id)
     {
         $sql = "Select * From member Where id = :id";

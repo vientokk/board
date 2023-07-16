@@ -22,6 +22,15 @@ document.addEventListener("DOMContentLoaded", () =>{
         self.location.href="./member_to_excel.php";
     })
 
+    //수정버튼
+    const btn_mem_edit = document.querySelectorAll(".btn_mem_edit");
+    btn_mem_edit.forEach((box) =>{
+        box.addEventListener("click",()=>{
+            const idx = box.dataset.idx;
+            self.location.href = './member_edit.php?idx='+idx;
+        })
+    })
+
     //삭제버튼
     const btn_mem_delete = document.querySelectorAll(".btn_mem_delete");
     btn_mem_delete.forEach((box)=>{
