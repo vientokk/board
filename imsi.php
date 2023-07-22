@@ -16,6 +16,19 @@
 //echo iconv('euc-kr', 'utf-8', $result);
 
 
+print_r($_SERVER);
+
+
+define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/board');
+define('ADMIN_DIR', DOCUMENT_ROOT . '/admin');
+define('DATA_DIR', DOCUMENT_ROOT . '/data');
+define('PROFILE_DIR', DATA_DIR . '/profile');
+
+echo DOCUMENT_ROOT . "<Br>";
+echo ADMIN_DIR . "<Br>";
+echo DATA_DIR . "<Br>";
+echo PROFILE_DIR;
+exit;
 
 echo "<p> 날씨출력</p>";
 $ch = curl_init();

@@ -134,8 +134,7 @@ class Member
             ':zipcode' => $marr['zipcode'],
             ':addr1' => $marr['addr1'],
             ':addr2' => $marr['addr2'],
-            ':photo' => $marr['photo'],
-            ':id' => $marr['id']
+            ':photo' => $marr['photo']
         ];
         if ($marr['password'] != '') {
             //단방향 암호화
@@ -144,7 +143,16 @@ class Member
             $sql .= ", password=:password";
         }
 
-        $sql .= " Where id=:id ";
+        if ($_SESSION['ses_level'] == 10 && isset($marr['idx']) && $marr['idx'] != '') {
+            $params[':level'] = $marr['level'];
+            $params[':idx'] = $marr['idx'];
+            $sql .= ', level=:level';
+            $sql .= "Where idx =:idx";
+        } else {
+            $params[':id'] = $marr['id'];
+            $sql .= " Where id=:id ";
+        }
+
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
     }
@@ -231,5 +239,22 @@ class Member
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':idx', $idx);
         $stmt->execute();
+    }
+
+
+
+    //프로필이미지 업로드
+    public function profile_upload($id, $new_photo, $old_photo = '')
+    {
+        if ($old_photo != '') {
+            unlink(PROFILE_DIR . $old_photo); //삭제
+        }
+
+        $tmparr = explode('.', $new_photo['name']);
+        $ext = end($tmparr); //확장자 추출
+        $photo = $id . '.' . $ext;  //새로운 파일명
+        copy($new_photo['tmp_name'], PROFILE_DIR . '/' . $photo);
+
+        return $photo;
     }
 }

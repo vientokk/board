@@ -27,6 +27,7 @@ $row = $mem->getInfoFormIdx($idx);
         <input type="hidden" name="id_chk" value="0"> <!--  아이디 중복확인 여부 -->
         <input type="hidden" name="email_chk" value="0"><!-- 이메일 중복확인 여부 -->
         <input type="hidden" name="old_email" value="<?= $row['email']; ?>"><!-- 이메일 중복확인 여부 -->
+        <input type="hidden" name="old_photo" value="<?= $row['photo']; ?>"><!-- 사진번경  중복확인 여부 -->
 
         <div class="d-flex gap-2 align-items-end">
             <div>
@@ -96,7 +97,7 @@ $row = $mem->getInfoFormIdx($idx);
                 <input type="file" name="photo" id="f_photo" class="form-control">
             </div>
             <?php if ($row['photo'] != '') {
-                echo '<img src="../data/profile/' . $row['photo'] . '" id="f_preview" class="w-25" alt="profile image">';
+                echo '<img src="../data/profile/' . $row['photo'] . '?v=' . date('His') . '" id="f_preview" class="w-25" alt="profile image">';
             } else {
                 echo '<img src="../images/preson1.png" id="f_preview" class="w-25" alt="profile image">';
             }
