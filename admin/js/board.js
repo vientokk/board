@@ -50,12 +50,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 게시판 생성 버튼 클릭
     const btn_create_modal = document.getElementById("btn_create_modal");
-    btn_create_modal.addEventListener("click",()=>{ 
-        board_title.value='';
+        btn_create_modal.addEventListener("click",()=>{ 
+            board_title.value='';
+    })
+    
+    //삭제버튼 클릭
+    const btn_mem_delete = document.querySelectorAll(".btn_mem_delete");
+    btn_mem_delete.forEach((box)=>{
+        box.addEventListener("click", () => {
+            if(!confirm("본 게시판을 삭제하시겠습니까?")){
+                return false;
+            } 
+
+            const idx = box.dataset.idx;
+            const f = new FormData()
+            f.append("idx", idx);
+            f.append("mode", "delete");
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("post", "./pg/board_process.php", true);
+            xhr.send(f);
+
+            xhr.onload = () =>{
+                if(xhr.status == 200){
+                    const data = JSON.parse(xhr.responseText)
+                    if(data.result == "success"){
+                        self.location.reload();
+                    }
+                }else{
+                    alert("통신실패")
+                }
+            }
+        })
+
     })
 
 
 })
 
 
- 

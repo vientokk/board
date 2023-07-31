@@ -37,6 +37,36 @@ class Board
         $stmt->execute();
     }
 
+    //게시판idx로 게시판 정보 가져오기
+    public function getBcode($idx)
+    {
+        $sql = "Select bcode From board_manage  where idx=:idx";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':idx', $idx);
+        $stmt->setFetchMode(PDO::FETCH_COLUMN, 0);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    //게시판 삭제
+    public function delete($idx)
+    {
+
+        $bcode = $this->getBcode($idx);
+
+        $sql = "Delete From board_manage Where idx=:idx";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':idx', $idx);
+        $stmt->execute();
+
+        $sql = "Delete From board_manage Where bcode=:bcode";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':bcode', $bcode);
+        $stmt->execute();
+    }
+
+    //게시판 코드 생성
     public function bcode_create()
     {
         $letter = range('a', 'z');
