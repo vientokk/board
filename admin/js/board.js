@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return false
     }
     
+    btn_board_create.disabled =true;
+    
+
 
     const xhr = new XMLHttpRequest()
     const f = new FormData()
